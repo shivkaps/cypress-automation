@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-04-18T19:19:35.612Z",
+    "end": "2020-04-18T19:19:46.082Z",
+    "duration": 10470,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "45afcf55-38fb-4d1e-82b5-470cada8baaa",
+      "title": "",
+      "fullFile": "cypress/integration/examples/test-framework-11.js",
+      "file": "cypress/integration/examples/test-framework-11.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "16ce1e6f-c05a-4ebf-b778-20580c0adb0e",
+          "title": "Cypress Test Framework",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "e2e-test-automation-framework",
+              "fullTitle": "Cypress Test Framework e2e-test-automation-framework",
+              "timedOut": null,
+              "duration": 8795,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var _this = this;\n// Creating an object for homePage and shopPage class so that we can use the methods defined in that class\nvar homePageObject = new _home[\"default\"]();\nvar shopPageObject = new _shop[\"default\"]();\nvar checkoutPageObject = new _checkout[\"default\"](); // Passing the values from config/*.json\n//--env configFile=prod\n// Check the code in plugins/index.js  // This will overwrite env in cypress.json\n// This will also overwrite any CLI --env // Preference will always be prod.json\ncy.visit(Cypress.env('url'));\nhomePageObject.getnameBox().type('Hello');\nhomePageObject.getGenderSelect().select('Female');\nhomePageObject.getShopButton().click(); // Looping over array of products defined in fixtures\nthis[\"var\"].productNameList.forEach(function (element) {\n  // Using addProductToCart method from command.js (Webelements in this method are being fetched from pageObjects)\n  cy.addProductToCart(element);\n});\nshopPageObject.clickCheckout().click();\nvar totalProductPrice = 0;\nvar totalPrice = 0; // Getting sum of prices for each product in the checkout page\ncy.get('tr td:nth-child(4) strong').each(function ($el, index, $list) {\n  var productPrice = $el.text().split(' ');\n  var priceInt = parseInt(productPrice[1].trim()); //parseInt or Number both can be used. See line 54\n  _this.random = 0;\n  totalProductPrice += priceInt;\n}); // Getting total price\ncy.get('.text-right strong').then(function (junkTotal) {\n  var total = junkTotal.text().split(' ');\n  totalPrice = Number(total[1].trim());\n}).then(function () {\n  assert.equal(totalProductPrice, totalPrice); //https://devhints.io/chai\n  // OR\n  expect(totalProductPrice).to.equal(totalPrice);\n});\ncheckoutPageObject.checkoutButton().click();\ncheckoutPageObject.country().type('India');\ncheckoutPageObject.selectcountry().click();\ncheckoutPageObject.termsAndCondition().click({\n  force: true\n});\ncheckoutPageObject.purchaseButton().click();\ncheckoutPageObject.purchaseMessage().should('include.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).');",
+              "err": {},
+              "uuid": "36b7d6b7-90c5-4129-94b8-18e64b3e00ac",
+              "parentUUID": "16ce1e6f-c05a-4ebf-b778-20580c0adb0e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36b7d6b7-90c5-4129-94b8-18e64b3e00ac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8795,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.1.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

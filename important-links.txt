@@ -1,0 +1,7 @@
+
+
+// Reporting
+https://dev.to/bushraalam/using-mochawesome-reporter-with-cypress-54pf
+Check your "mochawesome-merge" version. If it's v4 and above. Remove `--reportDir` from the script "combine-reports".
+That is `mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json` will be the corrected script
+
